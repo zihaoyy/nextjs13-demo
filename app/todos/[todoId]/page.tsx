@@ -1,5 +1,6 @@
 import React from 'react'
 import { Todo } from '../../../typings'
+import { notFound } from 'next/navigation'
 
 type PageProps = {
   params: {
@@ -18,6 +19,7 @@ const fetchTodo = async (todoId: string) => {
 
 async function TodoPage({ params: { todoId } }: PageProps) {
   const todo = await fetchTodo(todoId)
+  if (!todo.id) return notFound()
   return (
     <div className="p-10 bg-yellow-200 border-2 m-2 shadow-lg">
       <p>
